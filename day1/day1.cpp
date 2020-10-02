@@ -1,4 +1,4 @@
-//Day 1: Part 1 - Advent of Code 2019
+//Day 1 - Advent of Code 2019
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -13,7 +13,7 @@ int main()
 	int fuelOfFuel = 0;
 	int tempFuel = 0;
 
-	while (readFromFile >> input) //read through the file until nothing is there anymore
+	while (readFromFile >> input)
 	{
 		massOfModules.push_back(input);
 	}
@@ -24,25 +24,12 @@ int main()
 		fuelOfFuel = massOfModules[i] / 3 - 2;
 		while (fuelOfFuel >= 0)
 		{
-			cout << "fuelOfFuel: " << fuelOfFuel << endl;
 			fuelOfFuel = fuelOfFuel / 3 - 2;
-			cout << "fuelOfFuel: " << fuelOfFuel << endl;
-			//if (fuelOfFuel >= 0)
+			if (fuelOfFuel >= 0)
 				tempFuel += fuelOfFuel;
-			cout << "tempFuel: " << tempFuel << endl;
-
 		}
 	}
 
-	cout << "Total Fuel Alone: " << totalFuel << endl;
-	cout << "Total Fuel Actual: " << totalFuel + tempFuel << endl;
-
-
-	////Range based for loop: first declare type of thing and then create variable to hold that type, next tell it where to get it
-	//for (string masses : massOfModules)
-	//{
-	//	cout << masses << endl;
-	//}
-	//
+	cout << "Total Fuel:" << totalFuel + tempFuel << endl;
 	return 0;
 }
