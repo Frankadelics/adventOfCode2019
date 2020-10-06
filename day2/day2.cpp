@@ -130,15 +130,15 @@ int main()
 	getAOCInput(originalOpcode);	//Keep a copy of the original opcodes 
 	
 	/*
-			The Day 1 Solution. Uncomment to get solution. 
-			NOTE: Make sure to comment out day2 solution first. 
+			The Day 2 - Part 1 Solution. Uncomment to get solution. 
+			NOTE: Make sure to comment out Day 2 - Part 2 solution first!
 	*/
 	//runProgramOnce(opcode);
 	//cout << "Index 0: " << opcode[0] << endl;
 
 	/*
-			Day 2 Solution. Uncomment to get the solution.
-			NOTE: Make sure to comment day 1 solution first!
+			Day 2 - Part 2 Solution. Uncomment to get the solution.
+			NOTE: Make sure to comment out Day 2 - Part 1 solution first!
 	*/
 	//findNounAndVerb(opcode, originalOpcode);
 
