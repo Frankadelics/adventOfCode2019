@@ -13,38 +13,31 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
-void printFancy(vector<int>& codes)
+void printFancy(vector<int>& codes) //prints opcodes out in rows of 4
 {
 	for (int i = 0; i < codes.size(); i++)
 	{
 		cout << codes[i] << ", ";
 		if ((i + 1) % 4 == 0)
-		{
 			cout << endl << endl;
-		}
 
 	}
 }
-void printNormal(vector<int>& codes)
+void printNormal(vector<int>& codes) //Prints opcodes one line each
 {
 	for (int i = 0; i < codes.size(); i++)
-	{
 		cout << codes[i] << endl;
-	}
 }
-void getAOCInput(vector<int>& codes)
+void getAOCInput(vector<int>& codes) //Get the inputs given to me by Advent of Code 
 {
 	string input;
 	ifstream readFromFile("inputDay2.txt");
 	while (getline(readFromFile, input, ','))
-	{
 		codes.push_back(stoi(input));
-	}
 }
-void getdebugInputs(vector<int>& codes)
+void getdebugInputs(vector<int>& codes) //Small "program" given as an example that I used to debug and help wrap my head around problem
 {
 	codes.push_back(1);
 	codes.push_back(9);
@@ -60,56 +53,94 @@ void getdebugInputs(vector<int>& codes)
 	codes.push_back(50);
 	//codes.push_back(oof);
 }
-
-
-int main()
+void runProgramOnce(vector<int>& codes) //day 1 solution that runs through the "program" given to it
 {
-	vector<int> opcode;
-
-	//getdebugInputs(opcode);		//Get custom inputs I have selected
-	getAOCInput(opcode);		//Get the inputs I was given
-	
 	int firstPos = 0;
 	int secondPos = 0;
 	int storeResult = 0;
 	int result = 0;
-
-	//printFancy(opcode);
-	for (int i = 0; i < opcode.size(); i++)
+	for (int i = 0; i < codes.size(); i++)
 	{
-		cout << opcode[i] << endl;
-		if (opcode[i] == 1)
+		if (codes[i] == 1)
 		{
-			firstPos = opcode[i + 1];
-			secondPos = opcode[i + 2];
-			storeResult = opcode[i + 3];
+			firstPos = codes[i + 1];
+			secondPos = codes[i + 2];
+			storeResult = codes[i + 3];
 
-			result = opcode[firstPos] + opcode[secondPos];
-			opcode[storeResult] = result;
+			result = codes[firstPos] + codes[secondPos];
+			codes[storeResult] = result;
 			i += 3;
 		}
-		else if(opcode[i] == 2)
+		else if (codes[i] == 2)
 		{
-			firstPos = opcode[i + 1];
-			secondPos = opcode[i + 2];
-			storeResult = opcode[i + 3];
+			firstPos = codes[i + 1];
+			secondPos = codes[i + 2];
+			storeResult = codes[i + 3];
 
-			result = opcode[firstPos] * opcode[secondPos];
-			opcode[storeResult] = result;
+			result = codes[firstPos] * codes[secondPos];
+			codes[storeResult] = result;
 			i += 3;
 		}
-		else if (opcode[i] == 99)
-		{
+		else if (codes[i] == 99)
 			break;
-		}
 		else
 			cout << "I don't know how we managed to get here." << endl;
 	}
+}
+void resetOpcode(vector<int>& codes, vector<int>& OGcodes) //Reset the opcodes to the original values from the .txt
+{
+	codes = OGcodes;
+}
+void findNounAndVerb(vector<int>& codes, vector<int>& OGcodes)
+{
+	int noun = 0;
+	int verb = 0;
+	const int NEEDTHISNUM = 19690720;
 
-	cout << endl;
-	//Debug stuff
-	printFancy(opcode);
-	//printNormal(opcode);
+	for (int i = 0; i <= 99; i++)
+	{
+		for (int j = 0; j <= 99; j++)
+		{
+			codes[1] = i;
+			codes[2] = j;
+			runProgramOnce(codes);
+			if (codes[0] == NEEDTHISNUM)
+			{
+				noun = i;
+				verb = j;
+				cout << "Noun: " << noun << " | Verb: " << verb << endl;
+				resetOpcode(codes, OGcodes);
+				break;
+			}
+			else
+				resetOpcode(codes, OGcodes);
+		}
+		if (codes[0] == NEEDTHISNUM)
+			break;
+	}
+}
+
+int main()
+{
+	vector<int> opcode;
+	vector<int> originalOpcode;
+
+	//getdebugInputs(opcode);		//Get custom inputs I have selected
+	getAOCInput(opcode);	     	//Get the inputs I was given
+	getAOCInput(originalOpcode);	//Keep a copy of the original opcodes 
+	
+	/*
+			The Day 1 Solution. Uncomment to get solution. 
+			NOTE: Make sure to comment out day2 solution first. 
+	*/
+	//runProgramOnce(opcode);
+	//cout << "Index 0: " << opcode[0] << endl;
+
+	/*
+			Day 2 Solution. Uncomment to get the solution.
+			NOTE: Make sure to comment day 1 solution first!
+	*/
+	//findNounAndVerb(opcode, originalOpcode);
 
 	return 0;
 }
