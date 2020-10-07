@@ -7,8 +7,8 @@ using namespace std;
 
 class wireHistory {
 private:
-	int x;
-	int y;
+	int x = 0;
+	int y = 0;
 public:
 	void increaseX(int num) { x += num; }
 	void decreaseX(int num) { x -= num; }
@@ -17,23 +17,23 @@ public:
 	int getX() { return x; }
 	int getY() { return y; }
 };
-
-void printNormal(vector<wireHistory>& wires) //Prints opcodes one line each
+void printWireHistory(vector<wireHistory>& history) //Prints opcodes one line each
 {
-	for (int i = 0; i < wires.size(); i++)
+	for (int i = 0; i < history.size(); i++)
 	{
-		cout << "(" << wires[i].getX() << "," << wires[i].getY() << ")" << endl;
+		cout << "(" << history[i].getX() << "," << history[i].getY() << ")" << endl;
 	}
 }
-void getAOCInput(vector<string>& codes, string fileName) //Get the inputs given to me by Advent of Code 
+void getInput(vector<string>& wire, string fileName) //Get the inputs given to me by Advent of Code 
 {
 	string input;
 	ifstream readFromFile(fileName);
 	while (getline(readFromFile, input, ','))
-		codes.push_back(input);
+		wire.push_back(input);
 }
-void moveWire(vector<string>& wire, vector<wireHistory>& wireHistory)
+void traceWirePath(vector<string>& wire, vector<wireHistory>& history)
 {
+	wireHistory historyContainer;
 	string holder = " ";
 	int move = 0;
 	for (int i = 0; i < wire.size(); i++)
@@ -43,34 +43,40 @@ void moveWire(vector<string>& wire, vector<wireHistory>& wireHistory)
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			wireHistory[i].increaseY(move);
-			wireHistory[i].increaseX(0);
+			//cout << "Holder: " << holder << " | Move: " << move << endl;
+			historyContainer.increaseY(move);
+			historyContainer.increaseX(0);
+			history.push_back(historyContainer);
 		}
 		else if (holder[0] == 'D')
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			wireHistory[i].decreaseY(move);
-			wireHistory[i].decreaseX(0);
+			historyContainer.decreaseY(move);
+			historyContainer.decreaseX(0);
+			history.push_back(historyContainer);
 		}
 		else if (holder[0] == 'L')
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			wireHistory[i].decreaseX(move);
-			wireHistory[i].decreaseY(0);
+			historyContainer.decreaseX(move);
+			historyContainer.decreaseY(0);
+			history.push_back(historyContainer);
 		}
 		else if (holder[0] == 'R')
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			wireHistory[i].increaseX(move);
-			wireHistory[i].increaseY(0);
+			historyContainer.increaseX(move);
+			historyContainer.increaseY(0);
+			history.push_back(historyContainer);
 		}
 		else
 			cout << "I don't know how we got here" << endl;
 	}
 }
+
 
 int main()
 {
@@ -80,13 +86,21 @@ int main()
 	vector<wireHistory> redHistory;
 	vector<wireHistory> blackHistory;
 	
-	getAOCInput(redWire, "redWire.txt");
-	getAOCInput(blackWire, "blackWire.txt");
+	//getInput(redWire, "redWire.txt");
+	//getInput(blackWire, "blackWire.txt");
 
-	moveWire(redWire, redHistory);
-	//moveWire(blackWire, blackHistory);
+	getInput(redWire, "redDebug1.txt");
+	getInput(blackWire, "blackDebug1.txt");
 
-	//printNormal(redHistory);
+
+	traceWirePath(redWire, redHistory);
+	traceWirePath(blackWire, blackHistory);
+
+	printWireHistory(redHistory);
+
+	cout << "--------------------------------------------" << endl;
+
+	printWireHistory(blackHistory);
 
 	//Debug stuff
 	/*int tester = 0;
