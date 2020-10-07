@@ -5,7 +5,7 @@
 #include <sstream>
 using namespace std;
 
-class wireHistory {
+class wireHistory{ //The coordinate that represent where the wire has been
 private:
 	int x = 0;
 	int y = 0;
@@ -17,12 +17,10 @@ public:
 	int getX() { return x; }
 	int getY() { return y; }
 };
-void printWireHistory(vector<wireHistory>& history) //Prints opcodes one line each
+void printWireHistory(vector<wireHistory>& history) //Prints the history of the wire in a cartesian format
 {
 	for (int i = 0; i < history.size(); i++)
-	{
 		cout << "(" << history[i].getX() << "," << history[i].getY() << ")" << endl;
-	}
 }
 void getInput(vector<string>& wire, string fileName) //Get the inputs given to me by Advent of Code 
 {
@@ -31,7 +29,7 @@ void getInput(vector<string>& wire, string fileName) //Get the inputs given to m
 	while (getline(readFromFile, input, ','))
 		wire.push_back(input);
 }
-void traceWirePath(vector<string>& wire, vector<wireHistory>& history)
+void traceWirePath(vector<string>& wire, vector<wireHistory>& history) //Traces the path of the wire passed into it
 {
 	wireHistory historyContainer;
 	string holder = " ";
@@ -80,11 +78,10 @@ void traceWirePath(vector<string>& wire, vector<wireHistory>& history)
 
 int main()
 {
-	int rY, rX, bX, bY = 0;
-	vector<string> redWire;
-	vector<string> blackWire;
-	vector<wireHistory> redHistory;
-	vector<wireHistory> blackHistory;
+	vector<string> redWire, blackWire;
+//	vector<string> blackWire;
+	vector<wireHistory> redHistory, blackHistory;
+	//vector<wireHistory> blackHistory;
 	
 	//getInput(redWire, "redWire.txt");
 	//getInput(blackWire, "blackWire.txt");
