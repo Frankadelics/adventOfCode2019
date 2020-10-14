@@ -9,6 +9,13 @@ class Point {
 public:
 	int x = 0;
 	int y = 0;
+	bool operator== (Point oof)
+	{
+		if (x == oof.x && y == oof.y)
+			return true;
+		else
+			return false;
+	}
 };
 class Segment {
 private:
@@ -23,17 +30,17 @@ void printPreCur(Point previous, Point current)
 	cout << "Current: (" << current.x << "," << current.y << ")" << endl;
 	cout << "Previous: (" << previous.x << "," << previous.y << ")" << endl;
 }
+void printPoints(vector<Point>& points)
+{
+	for (int i = 0; i < points.size(); i++)
+		cout << "(" << points[i].x << ", " << points[i].y << ")" << endl;
+}
 void getInput(vector<string>& wire, string fileName) //Get the inputs given to me by Advent of Code 
 {
 	string input;
 	ifstream readFromFile(fileName);
 	while (getline(readFromFile, input, ','))
 		wire.push_back(input);
-}
-void printPoints(vector<Point>& points)
-{
-	for (int i = 0; i < points.size(); i++)
-		cout << "(" << points[i].x << ", " << points[i].y << ")" << endl;
 }
 void getWireHistory(vector<string>& wire, vector<Point>& pointsVector)
 {
@@ -47,96 +54,109 @@ void getWireHistory(vector<string>& wire, vector<Point>& pointsVector)
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			newEntry.x = previous.x;
-			newEntry.y = previous.y;
 			current.y = previous.y + move;
-			current.x = previous.x;
-			printPreCur(previous, current);
+			//printPreCur(previous, current);
 			for (int i = 0; i < abs(previous.y - current.y); i++)
 			{
-				newEntry.x += 0;
 				newEntry.y++;
 				pointsVector.push_back(newEntry);
 			}
-			previous.x = newEntry.x;
-			previous.y = newEntry.y;
+			previous = newEntry;
 		}
 		else if (holder[0] == 'D')
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			newEntry.x = previous.x;
-			newEntry.y = previous.y;
 			current.y = previous.y + move;
-			current.x = previous.x;
-			printPreCur(previous, current);
+			//printPreCur(previous, current);
 			for (int i = 0; i < abs(previous.y - current.y); i++)
 			{
-				newEntry.x += 0;
 				newEntry.y--;
 				pointsVector.push_back(newEntry);
 			}
-			previous.x = newEntry.x;
-			previous.y = newEntry.y;
+			previous = newEntry;
 		}
 		else if (holder[0] == 'L')
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			newEntry.x = previous.x;
-			newEntry.y = previous.y;
-			current.y = previous.y;
 			current.x = previous.x - move;
-			printPreCur(previous, current);
+			//printPreCur(previous, current);
 			for (int i = 0; i < abs(previous.x - current.x); i++)
 			{
 				newEntry.x--;
-				newEntry.y += 0;
 				pointsVector.push_back(newEntry);
 			}
-			previous.x = newEntry.x;
-			previous.y = newEntry.y;
+			previous = newEntry;
 		}
 		else if (holder[0] == 'R')
 		{
 			holder.erase(0, 1);
 			move = stoi(holder);
-			newEntry.x = previous.x;
-			newEntry.y = previous.y;
-			current.y = previous.y;
 			current.x = previous.x + move;
-			printPreCur(previous, current);
+			//printPreCur(previous, current);
 			for (int i = 0; i < abs(previous.x - current.x); i++)
 			{
 				newEntry.x++;
-				newEntry.y += 0;
 				pointsVector.push_back(newEntry);
 			}
-			previous.x = newEntry.x;
-			previous.y = newEntry.y;
+			previous = newEntry;
 		}
 		else
 			cout << "oof" << endl;
 	}
 }
+void compareWirePath(vector<Point>& red, vector<Point>& black, vector<Point>& crossedPoints)
+{
+	for (int i = 0; i < red.size(); i++)
+	{
+		for (int j = 0; j < black.size(); j++)
+		{
+			if (red[i] == black[j])
+				crossedPoints.push_back(red[i]);
+		}
+	}
+}
+void getDistance(vector<Point> points)
+{
+	int min = points[0].x + points[0].y;
+	int distance = 0;
+	for (int i = 0; i < points.size(); i++)
+	{
+		distance = points[i].x + points[i].y;
+		if (distance < min)
+			min = distance;
+	}
+	cout << "Max Distance: " << min << endl;
+}
 
 int main()
 {
 	vector<string> redWire, blackWire;
-	vector<Point> redPoints, blackPoints;
+	vector<Point> redPoints, blackPoints, crossedPoints;
 
-	getInput(redWire, "redDebug1.txt");
-	getInput(blackWire, "blackDebug1.txt");
-	
+	//getInput(redWire, "redDebug1.txt");
+	//getInput(blackWire, "blackDebug1.txt");
+	//getWireHistory(redWire, redPoints);
+	//getWireHistory(blackWire, blackPoints);
+	//printPoints(redPoints);
+	//cout << "------------------------------------" << endl;
+	//printPoints(blackPoints);
+	//cout << "------------------------------------" << endl;
+	//compareWirePath(redPoints, blackPoints, crossedPoints);
+	//printPoints(crossedPoints);
+	//getDistance(crossedPoints);
+
+	//Need to optimize the solution!! This takes way too long to finish
+	getInput(redWire, "redWire.txt");
+	getInput(blackWire, "blackWire.txt");
 	getWireHistory(redWire, redPoints);
 	getWireHistory(blackWire, blackPoints);
-
 	printPoints(redPoints);
-	cout << "------------------------------------" << endl;
-	printPoints(blackPoints);
-
-	//printVector(redWire);
-	//printVector(blackWire);
-
+	cout << "Hello again again" << endl;
+	compareWirePath(redPoints, blackPoints, crossedPoints);
+	cout << "Hello again" << endl;
+	getDistance(crossedPoints);
+	cout << "Hello" << endl;
 	return 0;
 }
