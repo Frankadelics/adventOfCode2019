@@ -228,30 +228,30 @@
 //	vector<wireHistory> redHistory, blackHistory;
 //	vector<Edges> redEdges, blackEdges;
 //	
-//	//getInput(redWire, "redWire.txt");
-//	//getInput(blackWire, "blackWire.txt");
+//	getInput(redWire, "redWire.txt");
+//	getInput(blackWire, "blackWire.txt");
 //
-//	getInput(redWire, "redDebug1.txt");
-//	getInput(blackWire, "blackDebug1.txt");
+//	//getInput(redWire, "redDebug1.txt");
+//	//getInput(blackWire, "blackDebug1.txt");
 //
-//	//findEdges(redWire, redEdges);
-//	//findEdges(blackWire, blackEdges);
+//	findEdges(redWire, redEdges);
+//	findEdges(blackWire, blackEdges);
 //
-//	//printEdges(redEdges, 'V');
-//	//cout << "-----------------" << endl;
-//	//printEdges(blackEdges, 'H');
+//	printEdges(redEdges, 'V');
+//	cout << "-------------------------------------------------------" << endl;
+//	printEdges(blackEdges, 'H');
 //
 //
 //
 //	
-//	findWireHistory(redWire, redHistory);
-//	findWireHistory(blackWire, blackHistory);
+//	//findWireHistory(redWire, redHistory);
+//	//findWireHistory(blackWire, blackHistory);
 //
-//	printWireHistory(redHistory);
+//	//printWireHistory(redHistory);
 //
-//	cout << "--------------------------------------------" << endl;
+//	//cout << "--------------------------------------------" << endl;
 //
-//	printWireHistory(blackHistory);
+//	//printWireHistory(blackHistory);
 //	
 //
 //
