@@ -237,9 +237,9 @@
 //	findEdges(redWire, redEdges);
 //	findEdges(blackWire, blackEdges);
 //
-//	printEdges(redEdges, 'V');
+//	printEdges(redEdges, 'A');
 //	cout << "-------------------------------------------------------" << endl;
-//	printEdges(blackEdges, 'H');
+//	printEdges(blackEdges, 'A');
 //
 //
 //

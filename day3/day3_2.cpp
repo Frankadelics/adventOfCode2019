@@ -6,22 +6,22 @@
 //#include <algorithm>
 //using namespace std;
 //
-//class Point {
-//public:
-//	int x = 0;
-//	int y = 0;
-//	bool operator== (Point oof)
-//	{
-//		if (x == oof.x && y == oof.y)
-//			return true;
-//		else
-//			return false;
-//	}
-//	bool operator< (const Point& rhs) const
-//	{
-//		return x < rhs.x;
-//	}
-//};
+////class Point {
+////public:
+////	int x = 0;
+////	int y = 0;
+////	bool operator== (Point oof)
+////	{
+////		if (x == oof.x && y == oof.y)
+////			return true;
+////		else
+////			return false;
+////	}
+////	bool operator< (const Point& rhs) const
+////	{
+////		return x < rhs.x;
+////	}
+////};
 //class Segment {
 //private:
 //	Point point1;
