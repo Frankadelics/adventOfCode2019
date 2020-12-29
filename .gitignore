@@ -153,3 +153,5 @@ day5/Debug/day5.tlog/link.write.1.tlog
 day5/Debug/day5.vcxproj.FileListAbsolute.txt
 day5/Debug/vc142.idb
 day5/Debug/vc142.pdb
+day5/.vs/day5/v16/ipch/AutoPCH/99bd371128bd3f43/DAY5STABLE.ipch
+day5/Debug/day5Stable.obj
