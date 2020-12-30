@@ -1,13 +1,5 @@
 //Day 5 - Advent of Code 2019
-/*
-	Rules:
-	99 - End the program
-	1  - Add two numbers together from two positions that follow
-	2  - Multiply two numbers togther from two positions that follow
-	3  - Takes single integer as input and saves to position given by only parameter
-	4  - Outputs value of onlu parameter
 
-*/
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -37,17 +29,12 @@ void runProgramV2(vector<int>& opcode)
 		c = opcode[i] / 100 % 10;
 		d = opcode[i] / 10 % 10;
 		e = opcode[i] / 1 % 10;
-		cout << "---------------------- i = " << i << " ------------------------" << endl;
-		cout << "Opcode: " << opcode[i] << endl;
 		if (e == 1) //Addition
 		{
 			valueC = c ? opcode[i + 1] : opcode[opcode[i + 1]];
 			valueB = b ? opcode[i + 2] : opcode[opcode[i + 2]];
 			opcode[opcode[i + 3]] = valueC + valueB;
 			i += 3;
-			cout << "valueC: " << valueC << endl;
-			cout << "valueB: " << valueB << endl;
-			cout << "Storing " << valueC + valueB << " in index: " << opcode[i + 3] << endl;
 		}
 		else if (e == 2) //Multiplication
 		{
@@ -55,9 +42,6 @@ void runProgramV2(vector<int>& opcode)
 			valueB = b ? opcode[i + 2] : opcode[opcode[i + 2]];
 			opcode[opcode[i + 3]] = valueC * valueB;
 			i += 3;
-			cout << "valueC: " << valueC << endl;
-			cout << "valueB: " << valueB << endl;
-			cout << "Storing " << valueC * valueB << " in index: " << opcode[i + 3] << endl;
 		}
 		else if (e == 3) //User Input
 		{
@@ -81,8 +65,6 @@ void runProgramV2(vector<int>& opcode)
 			}
 			else
 				i += 2;
-			cout << "valueC: " << valueC << endl;
-			cout << "i: " << i << endl;
 		}
 		else if (e == 6) //If first param is zero, sets i to value of second param
 		{
@@ -94,8 +76,6 @@ void runProgramV2(vector<int>& opcode)
 			}
 			else
 				i += 2;
-			cout << "valueC: " << valueC << endl;
-			cout << "i: " << i << endl;
 		}
 		else if (e == 7) //If first param is less than second param, stores 1 in position of third param
 		{
@@ -103,8 +83,6 @@ void runProgramV2(vector<int>& opcode)
 			valueB = b ? opcode[i + 2] : opcode[opcode[i + 2]];
 			opcode[opcode[i + 3]] = valueC < valueB ? 1 : 0;
 			i += 3;
-			cout << "valueC: " << valueC << endl;
-			cout << "valueB: " << valueB << endl;
 		}
 		else if (e == 8) //If first param is equal to second param, stores 1 in position of third param
 		{
@@ -112,8 +90,6 @@ void runProgramV2(vector<int>& opcode)
 			valueB = b ? opcode[i + 2] : opcode[opcode[i + 2]];
 			opcode[opcode[i + 3]] = valueC == valueB ? 1 : 0;
 			i += 3;
-			cout << "valueC: " << valueC << endl;
-			cout << "valueB: " << valueB << endl;
 		}
 		else if (e == 9)
 			break;
@@ -125,10 +101,8 @@ void runProgramV2(vector<int>& opcode)
 int main()
 {
 	vector<int> opcode;
-	vector<int> originalOpcode;
 
 	//getInput(opcode, "day5DebugInputs.txt");
-	printNormal(opcode);
 	getInput(opcode, "day5Input.txt");
 	runProgramV2(opcode);
 
