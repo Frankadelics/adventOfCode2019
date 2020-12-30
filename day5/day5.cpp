@@ -71,23 +71,33 @@ void runProgramV2(vector<int>& opcode)
 			cout << "Opcode 4 Encountered. Output: " << opcode[opcode[i + 1]] << endl;
 			i += 1;
 		}
-		else if (e == 5)
+		else if (e == 5) //If first param is non-zero, sets i to value of second param
 		{
 			valueC = c ? opcode[i + 1] : opcode[opcode[i + 1]];
 			if (valueC != 0)
+			{
 				i = b ? opcode[i + 2] : opcode[opcode[i + 2]];
+				i -= 1;
+			}
+			else
+				i += 2;
 			cout << "valueC: " << valueC << endl;
 			cout << "i: " << i << endl;
 		}
-		else if (e == 6)
+		else if (e == 6) //If first param is zero, sets i to value of second param
 		{
 			valueC = c ? opcode[i + 1] : opcode[opcode[i + 1]];
 			if (valueC == 0)
+			{
 				i = b ? opcode[i + 2] : opcode[opcode[i + 2]];
+				i -= 1;
+			}
+			else
+				i += 2;
 			cout << "valueC: " << valueC << endl;
 			cout << "i: " << i << endl;
 		}
-		else if (e == 7)
+		else if (e == 7) //If first param is less than second param, stores 1 in position of third param
 		{
 			valueC = c ? opcode[i + 1] : opcode[opcode[i + 1]];
 			valueB = b ? opcode[i + 2] : opcode[opcode[i + 2]];
@@ -96,7 +106,7 @@ void runProgramV2(vector<int>& opcode)
 			cout << "valueC: " << valueC << endl;
 			cout << "valueB: " << valueB << endl;
 		}
-		else if (e == 8)
+		else if (e == 8) //If first param is equal to second param, stores 1 in position of third param
 		{
 			valueC = c ? opcode[i + 1] : opcode[opcode[i + 1]];
 			valueB = b ? opcode[i + 2] : opcode[opcode[i + 2]];
@@ -117,8 +127,9 @@ int main()
 	vector<int> opcode;
 	vector<int> originalOpcode;
 
-	getInput(opcode, "day5DebugInputs.txt");
-	//getInput(opcode, "day5Input.txt");
+	//getInput(opcode, "day5DebugInputs.txt");
+	printNormal(opcode);
+	getInput(opcode, "day5Input.txt");
 	runProgramV2(opcode);
 
 	return 0;
